@@ -1,0 +1,120 @@
+{% extends 'gcms_sitehub/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="page-content bg-white">
+  <!-- Banner -->
+  <div class="page-banner ovbl-dark" style="background-image: url({% static 'assets/images/slider/slide1.jpg' %}); height: 80vh;">
+    <div class="container">
+      <div class="page-banner-entry">
+        <h1 class="text-white" style="margin-top: 52px">Contact US</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-row">
+    <div class="container">
+      <ul class="list-inline">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li>Contact Us</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Contact Info and Form -->
+  <div class="page-banner contact-page section-sp2">
+    <div class="container">
+      <div class="row">
+        <!-- Contact Info -->
+        <div class="col-lg-5 col-md-5 m-b30">
+          <div class="bg-primary text-white contact-info-bx">
+            <h2 class="m-b10 title-head">Contact <span>Information</span></h2>
+            <p>Government College of Management Science Sangota</p>
+            <div class="widget widget_getintuch">
+              <ul>
+                <li><i class="ti-location-pin"></i> {{ contact_info.address }}</li>
+                <li><i class="ti-mobile"></i> {{ contact_info.phone }}</li>
+                <li><i class="ti-email"></i> {{ contact_info.email }}</li>
+              </ul>
+            </div>
+            <h5 class="m-t0 m-b20">Follow Us</h5>
+            <ul class="list-inline contact-social-bx">
+              {% if contact_info.facebook_link %}
+              <li><a href="{{ contact_info.facebook_link }}" class="btn outline radius-xl"><i class="fa fa-facebook"></i></a></li>
+              {% endif %}
+              {% if contact_info.twitter_link %}
+              <li><a href="{{ contact_info.twitter_link }}" class="btn outline radius-xl"><i class="fa fa-twitter"></i></a></li>
+              {% endif %}
+              {% if contact_info.linkedin_link %}
+              <li><a href="{{ contact_info.linkedin_link }}" class="btn outline radius-xl"><i class="fa fa-linkedin"></i></a></li>
+              {% endif %}
+              {% if contact_info.google_plus_link %}
+              <li><a href="{{ contact_info.google_plus_link }}" class="btn outline radius-xl"><i class="fa fa-google-plus"></i></a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="col-lg-7 col-md-7">
+          {% if messages %}
+          <div class="mb-4">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <form method="POST" action="{% url 'contact_message' %}" class="contact-bx">
+            {% csrf_token %}
+            <div class="heading-bx left">
+              <h2 class="title-head">Get In <span>Touch</span></h2>
+              <p>It is a long established fact that a reader will be distracted by the readable content of a page.</p>
+            </div>
+            <div class="row placeani">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label>Your Name</label>
+                  <input name="name" type="text" class="form-control" required />
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label>Your Email Address</label>
+                  <input name="email" type="email" class="form-control" required />
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label>Your Phone</label>
+                  <input name="phone" type="text" class="form-control" required />
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label>Subject</label>
+                  <input name="subject" type="text" class="form-control" required />
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label>Type Message</label>
+                  <textarea name="message" rows="4" class="form-control" required></textarea>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <button type="submit" class="btn button-md">Send Message</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

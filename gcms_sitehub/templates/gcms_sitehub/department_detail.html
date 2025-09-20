@@ -1,0 +1,110 @@
+{% extends 'gcms_sitehub/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-content bg-light">
+
+  <!-- Page Banner -->
+  <div class="page-banner ovbl-dark" style="background-image: url({% static 'assets/images/slider/slide2.jpg' %}); height: 80vh; background-size: cover; background-position: center;">
+    <div class="container">
+      <div class="page-banner-entry text-center">
+        <h1 class="text-white" style="margin-top: 52px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);">Department Details</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Department Content -->
+  <div class="container py-5">
+    <div class="row">
+
+      <!-- Left Content -->
+      <div class="col-lg-8">
+        <h2 class="mb-3">{{ department.name }}</h2>
+        <p class="lead">{{ department.description }}</p>
+
+        <!-- Statistics -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <div class="card border-light shadow-sm text-center p-4">
+              <h5 class="text-uppercase">Total Students</h5>
+              <p class="display-5 text-primary">{{ department.num_of_students }}</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card border-light shadow-sm text-center p-4">
+              <h5 class="text-uppercase">Total Courses</h5>
+              <p class="display-5 text-primary">{{ department.num_of_courses }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Faculty Section -->
+        <div class="card shadow-sm mt-4">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Faculty Members</h5>
+          </div>
+          <div class="card-body">
+
+           <!-- Other Faculty Members -->
+<div class="row">
+  {% for member in faculty_members %}
+    {% if member.designation != 'HOD' %}
+    <div class="col-md-6 mb-4">
+      <div class="card h-100 border-0 shadow-sm p-3 d-flex flex-row align-items-center bg-light hover-shadow">
+        <!-- Faculty Image -->
+        <img src="{{ member.image.url }}" alt="{{ member.name }}" class="rounded-circle me-3" style="width: 120px; height: 120px; object-fit: cover;">
+
+        <!-- Faculty Details -->
+        <div>
+          <!-- Name -->
+          <h5 class="mb-1 fw-bold text-dark">{{ member.name }}</h5>
+
+          <!-- Designation -->
+          {% if member.designation %}
+          <span class="badge bg-secondary mb-1 text-white">{{ member.designation }}</span><br>
+          {% endif %}
+
+          <!-- Subject -->
+          <small class="text-muted" style="font-weight: 800;">{{ member.subject }}</small>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+
+  {% if faculty_members|length == 0 %}
+  <p class="text-muted">No faculty members found.</p>
+  {% endif %}
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+<!-- Right Sidebar -->
+<div class="col-lg-4">
+  {% if department.hod_image %}
+  <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+    <img src="{{ department.hod_image.url }}" class="img-fluid" alt="{{ department.head_of_department }}">
+    <div class="card-body text-center bg-light">
+      <h5 class="card-title text-uppercase fw-bold mb-2 text-primary">Head of Department</h5>
+   <p class="fs-5 text-uppercase text-primary mb-2" style="font-weight: 700;">
+  {{ department.head_of_department }}
+</p>
+
+      <span class="badge bg-dark fs-6 px-3 py-2 rounded-pill text-white">
+        {{ department.degree_type }} - {{ department.name }}
+      </span>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}

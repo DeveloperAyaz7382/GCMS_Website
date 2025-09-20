@@ -1,0 +1,282 @@
+{% extends 'gcms_sitehub/base.html' %}
+{% load static %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block content %}
+
+<!-- Custom CSS Styles -->
+<style>
+      :root {
+        --primary-color: #4c1864;
+        --secondary-color: #9c27b0;
+        --accent-color: #e1bee7;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      /* Section Styling */
+      .facility-section {
+        padding: 80px 0;
+      }
+
+      .section-title {
+        margin-bottom: 50px;
+        position: relative;
+        color: var(--primary-color);
+        font-weight: 700;
+      }
+      .section-title:after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        margin: 15px auto 0;
+        background: linear-gradient(
+          90deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        border-radius: 2px;
+      }
+
+      /* Carousel */
+      .carousel-item img {
+        height: 550px;
+        object-fit: cover;
+      }
+
+      .carousel-caption {
+        background-color: rgba(76, 24, 100, 0.8);
+        border-radius: 10px;
+        padding: 20px;
+        bottom: 40px;
+        left: 10%;
+        right: 10%;
+      }
+
+      .carousel-indicators button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+      .carousel-indicators button.active {
+        background-color: white;
+      }
+
+      /* Carousel Controls */
+      .carousel-control-prev,
+      .carousel-control-next {
+        width: 8%;
+      }
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon {
+        width: 2rem;
+        height: 2.5rem;
+        background-size: 100% 100%;
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.9));
+      }
+      @media (max-width: 768px) {
+        .carousel-control-prev,
+        .carousel-control-next {
+          width: 15%;
+        }
+      }
+
+      /* Facility Cards */
+      .facility-card {
+        height: 100%;
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+      .facility-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(76, 24, 100, 0.2);
+      }
+      .facility-card .card-body {
+        padding: 25px;
+      }
+      .facility-card .card-title {
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+
+      /* Buttons */
+      .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        padding: 10px 25px;
+        font-weight: 500;
+      }
+      .btn-primary:hover {
+        background-color: #3a1250;
+        border-color: #3a1250;
+      }
+
+      /* List Group */
+      .list-group-item {
+        padding: 12px 0;
+        border-left: none;
+        border-right: none;
+      }
+      .list-group-item:first-child {
+        border-top: none;
+      }
+
+      /* Form */
+      form {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+      form h3 {
+        color: var(--primary-color);
+        margin-bottom: 25px;
+      }
+      .form-control,
+      .form-select {
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid #eee;
+      }
+      .form-control:focus,
+      .form-select:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 0.25rem rgba(156, 39, 176, 0.25);
+      }
+
+      /* Image Styling */
+      .img-fluid.rounded {
+        border-radius: 15px !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Utility Classes */
+      .bg-light {
+        background-color: #f9f5fc !important;
+      }
+      .text-primary {
+        color: var(--primary-color) !important;
+      }
+    </style>
+
+<!-- Banner Section -->
+<div class="page-banner ovbl-dark d-flex align-items-center justify-content-center text-center" style="background-image: url({% static 'assets/images/slider/slide1.jpg' %}); height: 80vh; background-size: cover; background-position: center;">
+  <div class="container">
+    <div class="page-banner-entry">
+      <h1 class="text-white display-4 fw-bold">Facilities of GCMS</h1>
+    </div>
+  </div>
+</div>
+<section class="facility-section bg-light">
+  <div class="container">
+    <h2 class="section-title text-center">Modern Computer Labs</h2>
+    <div class="row g-4">
+      {% for lab in labs %}
+      <div class="col-md-6 col-lg-6">
+        <div class="card facility-card">
+          <img src="{{ lab.image.url }}" class="card-img-top" alt="{{ lab.title }}">
+          <div class="card-body">
+            <h4 class="card-title">{{ lab.title }}</h4>
+            <p class="card-text">{{ lab.description }}</p>
+            <ul class="list-group list-group-flush mb-3">
+              {% if lab.feature_1 %}
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-primary me-2"></i>{{ lab.feature_1 }}</li>
+              {% endif %}
+              {% if lab.feature_2 %}
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-primary me-2"></i>{{ lab.feature_2 }}</li>
+              {% endif %}
+              {% if lab.feature_3 %}
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-primary me-2"></i>{{ lab.feature_3 }}</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="facility-section">
+  <div class="container">
+    <h2 class="section-title text-center">Hostel Facilities</h2>
+    <div class="row mb-5">
+      <div class="col-md-6">
+        <img src="{{ hostel_intro.image.url }}" class="img-fluid rounded shadow" alt="Hostel Building">
+      </div>
+      <div class="col-md-6">
+        <h3 class="mb-3" style="color: var(--primary-color)">
+          {{ hostel_intro.heading }}
+        </h3>
+        <p class="lead">{{ hostel_intro.description }}</p>
+        <div class="row g-3 mt-4">
+          <div class="col-sm-6">
+            <div class="d-flex align-items-center p-3 bg-light rounded">
+              <i class="bi bi-shield-check fs-2 text-primary me-3"></i>
+              <div><h5 class="mb-0">24/7 Security</h5><p class="text-muted small mb-0">CCTV and guard service</p></div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="d-flex align-items-center p-3 bg-light rounded">
+              <i class="bi bi-wifi fs-2 text-primary me-3"></i>
+              <div><h5 class="mb-0">High-Speed Wi-Fi</h5><p class="text-muted small mb-0">Fiber internet throughout</p></div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="d-flex align-items-center p-3 bg-light rounded">
+              <i class="bi bi-lightning-charge fs-2 text-primary me-3"></i>
+              <div><h5 class="mb-0">Power Backup</h5><p class="text-muted small mb-0">Uninterrupted electricity</p></div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="d-flex align-items-center p-3 bg-light rounded">
+              <i class="bi bi-water fs-2 text-primary me-3"></i>
+              <div><h5 class="mb-0">Clean Water</h5><p class="text-muted small mb-0">Purified drinking water</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      {% for facility in hostel_facilities %}
+      <div class="col-md-4">
+        <div class="card facility-card">
+          <img src="{{ facility.image.url }}" class="card-img-top" alt="{{ facility.title }}">
+          <div class="card-body">
+            <h4 class="card-title">{{ facility.title }}</h4>
+            <p class="card-text">{{ facility.description }}</p>
+            <ul class="list-group list-group-flush">
+              {% if facility.feature_1 %}
+              <li class="list-group-item"><i class="bi bi-check-circle text-primary me-2"></i>{{ facility.feature_1 }}</li>
+              {% endif %}
+              {% if facility.feature_2 %}
+              <li class="list-group-item"><i class="bi bi-check-circle text-primary me-2"></i>{{ facility.feature_2 }}</li>
+              {% endif %}
+              {% if facility.feature_3 %}
+              <li class="list-group-item"><i class="bi bi-check-circle text-primary me-2"></i>{{ facility.feature_3 }}</li>
+              {% endif %}
+              {% if facility.feature_4 %}
+              <li class="list-group-item"><i class="bi bi-check-circle text-primary me-2"></i>{{ facility.feature_4 }}</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

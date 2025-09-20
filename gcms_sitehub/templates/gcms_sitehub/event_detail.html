@@ -1,0 +1,56 @@
+{% extends 'gcms_sitehub/base.html' %}
+{% load static %}
+
+{% block title %}
+Event Details
+{% endblock %}
+
+{% block content %}
+<!-- Content -->
+<div class="page-content bg-light">
+    <!-- Inner Page Banner -->
+    <div class="page-banner ovbl-dark" style="background-image: url({% static 'assets/images/slider/slide1.jpg' %}); height: 80vh;">
+        <div class="container">
+            <div class="page-banner-entry text-center">
+                <h1 class="text-white" style="margin-top: 52px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); font-size: 3rem;">College Events</h1>
+            </div>
+        </div> 
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-row">
+        <div class="container">
+            <ul class="list-inline">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li>Events</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Event Details -->
+    <div class="container py-5">
+        <div class="row">
+            <!-- Event Image -->
+            <div class="col-md-6 mb-4">
+                {% if event.event_image %}
+                    <img src="{{ event.event_image.url }}" alt="{{ event.title }}" class="img-fluid rounded shadow-sm"/>
+                {% else %}
+                    <img src="{% static 'assets/images/default-event-image.png' %}" alt="Default Event" class="img-fluid rounded shadow-sm"/>
+                {% endif %}
+            </div>
+
+            <!-- Event Info -->
+            <div class="col-md-6">
+                <h2 class="display-4 font-weight-bold">{{ event.title }}</h2>
+                <p class="text-muted mb-4"><i class="fa fa-calendar"></i> {{ event.date|date:"F d, Y" }} | <i class="fa fa-map-marker"></i> {{ event.venue }}</p>
+
+                <div class="event-description">
+                    <p>{{ event.description }}</p>
+                </div>
+
+                <a href="{% url 'event_list' %}" class="btn btn-primary btn-lg mt-3">← Back to Events</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'gcms_sitehub/base.html' %}
+{% load static %}
+
+{% block title %}Event{% endblock %}
+
+{% block content %}
+<div class="page-content bg-white">
+    <!-- Banner -->
+    <div class="page-banner ovbl-dark" style="background-image: url({% static 'assets/images/slider/slide1.jpg' %}); height: 80vh;">
+        <div class="container">
+            <div class="page-banner-entry">
+                <h1 class="text-white" style="margin-top: 52px">College Events</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-row">
+        <div class="container">
+            <ul class="list-inline">
+                <li><a href="{% url 'event_list' %}">Home</a></li>
+                <li>Events</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Event Content -->
+    <div class="content-block">
+        <div class="section-area section-sp1 gallery-bx">
+            <div class="container">
+                <!-- Filters -->
+                <div class="feature-filters clearfix center m-b40">
+                    <ul class="filters" data-toggle="buttons">
+                        <li class="btn active"><input type="radio" /><a href="#" onclick="filterEvents('')"><span>All Events</span></a></li>
+                        <li class="btn"><input type="radio" /><a href="#" onclick="filterEvents('happening')"><span>Ongoing</span></a></li>
+                        <li class="btn"><input type="radio" /><a href="#" onclick="filterEvents('upcoming')"><span>Upcoming</span></a></li>
+                        <li class="btn"><input type="radio" /><a href="#" onclick="filterEvents('expired')"><span>Past Events</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- Event Cards -->
+                <div class="clearfix">
+                    <ul id="masonry" class="ttr-gallery-listing magnific-image row">
+                        {% for event in events %}
+                        <li class="action-card col-lg-6 col-md-6 col-sm-12 {{ event.category }}" style="margin-bottom: 30px">
+                            <div class="event-bx m-b30">
+                                <div class="action-box" style="height: 250px; overflow: hidden; position: relative;">
+                                    <a href="{% url 'event_detail' event.id %}" style="display: block; width: 100%; height: 100%;">
+                                        <img src="{{ event.event_image.url|default_if_none:'/static/assets/images/default-event.jpg' }}" alt="{{ event.title }}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;" />
+                                    </a>
+                                </div>
+                                <div class="info-bx d-flex" style="flex: 1; padding: 15px; overflow: auto">
+                                    <div style="min-width: 70px">
+                                        <div class="event-time">
+                                            <div class="event-date">{{ event.date.day }}</div>
+                                            <div class="event-month">{{ event.date|date:"F" }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="event-info" style="flex: 1">
+                                        <h4 class="event-title">
+                                            <a href="{% url 'event_detail' event.id %}">{{ event.title }}</a>
+                                        </h4>
+                                        <ul class="media-post">
+                                            <li><a href="#"><i class="fa fa-clock-o"></i> {{ event.date|time:"h:i A" }}</a></li>
+                                            <li><a href="#"><i class="fa fa-map-marker"></i> {{ event.venue }}</a></li>
+                                        </ul>
+                                        <p>{{ event.description|slice:":100" }}...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        {% empty %}
+                            <p class="text-center">No events found.</p>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filter Script -->
+<script>
+function filterEvents(category) {
+    const allEvents = document.querySelectorAll("#masonry > li");
+    allEvents.forEach(event => {
+        if (category === "" || event.classList.contains(category)) {
+            event.style.display = "block";
+        } else {
+            event.style.display = "none";
+        }
+    });
+}
+</script>
+{% endblock %}

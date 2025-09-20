@@ -1,0 +1,38 @@
+{% extends 'gcms_sitehub/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Banner -->
+<div class="page-content bg-white">
+    <!-- Banner -->
+    <div class="page-banner ovbl-dark" style="background-image: url({% static 'assets/images/slider/slide1.jpg' %}); height: 80vh;">
+        <div class="container">
+            <div class="page-banner-entry">
+                <h1 class="text-white" style="margin-top: 52px">Our Courses</h1>
+            </div>
+        </div>
+    </div>
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="mb-4 text-center">Our Courses</h2>
+    <div class="row">
+      {% for course in courses %}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            {% if course.image %}
+              <img src="{{ course.image.url }}" class="card-img-top" alt="{{ course.title }}">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ course.title }}</h5>
+              <p class="card-text">{{ course.description|truncatewords:20 }}</p>
+              <p><strong>Duration:</strong> {{ course.duration }}</p>
+              <a href="{% url 'course_detail' course.slug %}" class="btn btn-primary">Learn More</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

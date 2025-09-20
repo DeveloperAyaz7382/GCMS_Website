@@ -1,0 +1,148 @@
+{% extends 'gcms_sitehub/base.html' %}
+{% load static %}
+
+{% block title %}
+About Us
+{% endblock %}
+
+{% block content %}
+<!-- Inner Content Box ==== -->
+<div class="page-content">
+  <!-- Page Heading Box ==== -->
+  <div class="page-banner ovbl-dark" style="background-image: url('{{ highlight.background_image.url }}'); height: 80vh;">
+    <div class="container">
+      <div class="page-banner-entry">
+        <h1 class="text-white" style="margin-top: 52px">{{ principal.title }}</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="breadcrumb-row">
+    <div class="container">
+      <ul class="list-inline">
+        <li><a href="#">Home</a></li>
+        <li>About Us</li>
+      </ul>
+    </div>
+  </div>
+  <!-- Page Heading Box END ==== -->
+
+  <!-- Page Content Box ==== -->
+  <div class="content-block">
+    <!-- Message from the Principal ==== -->
+    <div class="section-area bg-gray section-sp1 our-story">
+      <div class="container">
+        <div class="row align-items-center d-flex">
+          <div class="col-lg-5 col-md-12 heading-bx">
+            <h2 class="m-b10">{{ principal.title }}</h2>
+            <h5 class="fw4">{{ principal.subtitle }}</h5>
+            <p>{{ principal.message }}</p>
+            <a href="#" class="btn">Read More</a>
+          </div>
+          <div class="col-lg-7 col-md-12 heading-bx p-lr">
+            <div class="video-bx">
+              <img src="{{ principal.image.url }}" alt="Principal's Message Image" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Message from the Principal END ==== -->
+
+    <!-- Philosophy Section ==== -->
+    <div class="section-area section-sp1">
+      <div class="container">
+        <div class="row">
+          {% for block in philosophy %}
+          <div class="col-lg-3 col-md-6 col-sm-6 m-b30">
+            <div class="feature-container">
+              <div class="feature-md text-white m-b20">
+                <a href="#" class="icon-cell">
+                  <img src="{{ block.icon.url }}" alt="" />
+                </a>
+              </div>
+              <div class="icon-content">
+                <h5 class="ttr-tilte">{{ block.title }}</h5>
+                <p>{{ block.description }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <!-- Philosophy Section END ==== -->
+
+    <!-- Our Status Section ==== -->
+    <div class="section-area content-inner section-sp1">
+      <div class="container">
+        <div class="section-content">
+          <div class="row">
+            {% for stat in stats %}
+            <div class="col-lg-3 col-md-6 col-sm-6 col-6 m-b30">
+              <div class="counter-style-1">
+                <div class="text-{{ stat.color }}">
+                  <span class="counter">{{ stat.count }}</span><span>+</span>
+                </div>
+                <span class="counter-text">{{ stat.title }}</span>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Our Status Section END ==== -->
+
+    <!-- Highlight Section ==== -->
+    <div class="section-area section-sp2 bg-fix ovbl-dark join-bx text-center" style="background-image: url('{{ highlight.background_image.url }}')">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="join-content-bx text-white">
+              <h2>{{ highlight.heading }}</h2>
+              <h4>{{ highlight.subheading }}</h4>
+              <p>{{ highlight.description }}</p>
+              <a href="{{ highlight.button_url }}" class="btn button-md">{{ highlight.button_text }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Highlight Section END ==== -->
+
+    <!-- Testimonials Section ==== -->
+    <div class="section-area section-sp2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 heading-bx left">
+            <h2 class="title-head text-uppercase">What People <span>Say</span></h2>
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page</p>
+          </div>
+        </div>
+        <div class="testimonial-carousel owl-carousel owl-btn-1 col-12 p-lr0">
+          {% for t in testimonials %}
+          <div class="item">
+            <div class="testimonial-bx">
+              <div class="testimonial-thumb">
+                <img src="{{ t.image.url }}" alt="{{ t.name }}" />
+              </div>
+              <div class="testimonial-info">
+                <h5 class="name">{{ t.name }}</h5>
+                <p>-{{ t.title }}</p>
+              </div>
+              <div class="testimonial-content">
+                <p>{{ t.message }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <!-- Testimonials Section END ==== -->
+  </div>
+  <!-- Page Content Box END ==== -->
+</div>
+<!-- Inner Content Box END ==== -->
+{% endblock %}

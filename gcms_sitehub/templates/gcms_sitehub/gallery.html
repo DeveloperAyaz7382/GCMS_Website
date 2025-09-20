@@ -1,0 +1,61 @@
+{% extends 'gcms_sitehub/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-content bg-white">
+    <!-- Inner Page Banner -->
+    <div class="page-banner ovbl-dark" style="background-image: url({% static 'assets/images/slider/slide1.jpg' %}); height: 80vh;">
+        <div class="container">
+            <div class="page-banner-entry">
+                <h1 class="text-white" style="margin-top: 52px">Our Gallery</h1>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-row">
+        <div class="container">
+            <ul class="list-inline">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li>Our Gallery</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Gallery -->
+    <div class="section-area section-sp1 gallery-bx">
+        <div class="container">
+            <div class="clearfix">
+                <ul id="masonry" class="ttr-gallery-listing magnific-image row">
+                    {% for img in images %}
+                    <li class="action-card col-lg-3 col-md-4 col-sm-6">
+                        <div class="ttr-box portfolio-bx">
+                            <div class="ttr-media media-ov2 media-effect">
+                                <a href="javascript:void(0);">
+                                    <img src="{{ img.image.url }}" alt="{{ img.caption }}">
+                                </a>
+                                <div class="ov-box">
+                                    <div class="overlay-icon align-m">
+                                        <a href="{{ img.image.url }}" class="magnific-anchor" title="{{ img.caption }}">
+                                            <i class="ti-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="portfolio-info-bx bg-primary">
+                                        <h4><a href="#">{{ img.caption|default:"Gallery Image" }}</a></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% empty %}
+                    <p class="text-center text-muted">No images found in the gallery.</p>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Content END-->
+	{% endblock %}

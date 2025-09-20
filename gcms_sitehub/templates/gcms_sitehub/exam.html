@@ -1,0 +1,222 @@
+{% extends 'gcms_sitehub/base.html' %}
+{% load static %}
+
+{% block title %}Examination Information{% endblock %}
+
+{% block extra_css %}
+<style>
+  :root {
+    --primary: #4c1864;
+    --secondary: #f7b205;
+  }
+
+  body {
+    background-color: #f8f9fa;
+  }
+
+  .card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(76, 24, 100, 0.15);
+    transition: transform 0.3s ease;
+    margin-bottom: 25px;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(76, 24, 100, 0.25);
+  }
+
+  .card-header {
+    background-color: var(--primary);
+    color: white;
+    font-weight: bold;
+    border-bottom: 4px solid var(--secondary);
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .accordion-button:not(.collapsed) {
+    background-color: rgba(76, 24, 100, 0.1);
+    color: var(--primary);
+  }
+
+  .accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(76, 24, 100, 0.25);
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    display: none;
+    cursor: pointer;
+    z-index: 9999;
+  }
+
+  .back-to-top:hover {
+    background-color: var(--secondary);
+    color: var(--primary);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- 🔷 Page Banner -->
+<div class="page-banner ovbl-dark" style="background-image: url('{% static "assets/images/slider/slide1.jpg" %}'); height: 80vh;">
+  <div class="container">
+    <div class="page-banner-entry">
+      <h1 class="text-white mt-5">Examination Section</h1>
+    </div>
+  </div>
+</div>
+
+<!-- 🔷 Main Content -->
+<div class="container py-5">
+
+  <!-- 🔹 Intro Text -->
+  <div class="text-center mb-5">
+    <h1 class="display-4">Examination Information Center</h1>
+    <p class="lead text-muted">All the information you need about upcoming exams, results, and rules.</p>
+  </div>
+
+  <!-- 🔹 Exams Section -->
+  <h3 class="mb-4">📅 Upcoming Exams by Department</h3>
+  {% if departments %}
+    {% for dept in departments %}
+      {% if dept.exams.all %}
+        <h4 class="mb-3 text-primary">{{ dept.name }}</h4>
+        {% for exam in dept.exams.all %}
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <span>{{ exam.title }}</span>
+            <span class="badge bg-info text-dark">{{ exam.status }}</span>
+          </div>
+          <div class="card-body">
+            <p><strong>Date:</strong> {{ exam.start_date|date:"F j, Y" }} – {{ exam.end_date|date:"F j, Y" }}</p>
+            <p><strong>Time:</strong> {{ exam.time }}</p>
+            <p><strong>Venue:</strong> {{ exam.venue }}</p>
+            <div class="alert alert-info">{{ exam.instructions }}</div>
+
+            {% if exam.schedule_file %}
+              <!-- ✅ Download schedule file if uploaded -->
+              <a href="{{ exam.schedule_file.url }}" class="btn btn-outline-success mb-2" download>
+                <i class="fas fa-file-download"></i> Download Schedule
+              </a>
+            {% else %}
+              <!-- 🔸 If no schedule file -->
+              <p class="text-muted"><i class="fas fa-info-circle"></i> Schedule not uploaded.</p>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <p class="text-muted">No departments or exams found.</p>
+  {% endif %}
+
+  <!-- 🔹 Results Section -->
+  <h3 class="mt-5 mb-4">📜 Results</h3>
+  {% if results %}
+    {% for result in results %}
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><strong>{{ result.exam.title }} Result</strong></span>
+        <span class="badge 
+          {% if result.status == 'Released' %}
+            bg-success
+          {% elif result.status == 'Pending' %}
+            bg-warning text-dark
+          {% else %}
+            bg-secondary
+          {% endif %}
+        ">
+          {{ result.status }}
+        </span>
+      </div>
+
+      <div class="card-body">
+        <p><strong>📅 Release Date:</strong> {{ result.release_date|date:"F j, Y" }}</p>
+        <p><strong>🔑 Access:</strong> {{ result.access_method }}</p>
+        <p><strong>🆔 Required Info:</strong> {{ result.required_info }}</p>
+
+        {% if result.progress > 0 %}
+        <!-- ✅ Progress bar -->
+        <div class="progress mt-3" style="height: 25px;">
+          <div class="progress-bar bg-success progress-bar-striped" role="progressbar"
+               style="width: {{ result.progress }}%;" aria-valuenow="{{ result.progress }}"
+               aria-valuemin="0" aria-valuemax="100">
+            {{ result.progress }}%
+          </div>
+        </div>
+        {% else %}
+          <p class="text-muted mt-2">No progress reported.</p>
+        {% endif %}
+
+        {% if result.result_file %}
+          <!-- ✅ Download result file -->
+          <a href="{{ result.result_file.url }}" class="btn btn-outline-success mt-3" download>
+            <i class="fas fa-download"></i> Download Result
+          </a>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  {% else %}
+    <p class="text-muted">No results available at this time.</p>
+  {% endif %}
+
+  <!-- 🔹 Rules Section -->
+  <h2 class="mt-5 mb-4">📘 Examination Rules & Guidelines</h2>
+  {% if rules %}
+    <div class="accordion" id="rulesAccordion">
+      {% for rule in rules %}
+      <div class="accordion-item mb-3">
+        <h5 class="accordion-header" id="heading{{ forloop.counter }}">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="false"
+                  aria-controls="collapse{{ forloop.counter }}">
+            📝 Rule {{ forloop.counter }}: {{ rule.category }}
+          </button>
+        </h5>
+        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse"
+             aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#rulesAccordion">
+          <div class="accordion-body">
+            {{ rule.content|linebreaks }}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-muted">No rules available.</p>
+  {% endif %}
+
+</div> <!-- End .container -->
+
+<!-- 🔝 Back to Top Button -->
+<button class="back-to-top fa fa-chevron-up"></button>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // 🔼 Show back-to-top button on scroll
+  const backToTop = document.querySelector(".back-to-top");
+  window.addEventListener("scroll", () => {
+    backToTop.style.display = window.scrollY > 100 ? "block" : "none";
+  });
+
+  // 🔼 Scroll to top on click
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+{% endblock %}

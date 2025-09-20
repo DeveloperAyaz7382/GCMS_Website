@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Facilities</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- FAVICONS ICON ============================================= -->
+    <link
+      rel="icon"
+      href="assets/images/Logo_sangota-removebg-preview.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/images/Logo_sangota-removebg-preview.png"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- PAGE TITLE HERE ============================================= -->
+    <title>GCMS</title>
+
+    <!-- MOBILE SPECIFIC ============================================= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.min.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- All PLUGINS CSS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="assets/css/assets.css" />
+
+    <!-- TYPOGRAPHY ============================================= -->
+    <link rel="stylesheet" type="text/css" href="assets/css/typography.css" />
+
+    <!-- SHORTCODES ============================================= -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/css/shortcodes/shortcodes.css"
+    />
+
+    <!-- STYLESHEETS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <link
+      class="skin"
+      rel="stylesheet"
+      type="text/css"
+      href="assets/css/color/color-1.css"
+    />
+
+    <!-- REVOLUTION SLIDER CSS ============================================= -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/vendors/revolution/css/layers.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/vendors/revolution/css/settings.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/vendors/revolution/css/navigation.css"
+    />
+    <style>
+      :root {
+        --primary-color: #4c1864;
+        --secondary-color: #9c27b0;
+        --accent-color: #e1bee7;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      /* Section Styling */
+      .facility-section {
+        padding: 80px 0;
+      }
+
+      .section-title {
+        margin-bottom: 50px;
+        position: relative;
+        color: var(--primary-color);
+        font-weight: 700;
+      }
+      .section-title:after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        margin: 15px auto 0;
+        background: linear-gradient(
+          90deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        border-radius: 2px;
+      }
+
+      /* Carousel */
+      .carousel-item img {
+        height: 550px;
+        object-fit: cover;
+      }
+
+      .carousel-caption {
+        background-color: rgba(76, 24, 100, 0.8);
+        border-radius: 10px;
+        padding: 20px;
+        bottom: 40px;
+        left: 10%;
+        right: 10%;
+      }
+
+      .carousel-indicators button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+      .carousel-indicators button.active {
+        background-color: white;
+      }
+
+      /* Carousel Controls */
+      .carousel-control-prev,
+      .carousel-control-next {
+        width: 8%;
+      }
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon {
+        width: 2rem;
+        height: 2.5rem;
+        background-size: 100% 100%;
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.9));
+      }
+      @media (max-width: 768px) {
+        .carousel-control-prev,
+        .carousel-control-next {
+          width: 15%;
+        }
+      }
+
+      /* Facility Cards */
+      .facility-card {
+        height: 100%;
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+      .facility-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(76, 24, 100, 0.2);
+      }
+      .facility-card .card-body {
+        padding: 25px;
+      }
+      .facility-card .card-title {
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+
+      /* Buttons */
+      .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        padding: 10px 25px;
+        font-weight: 500;
+      }
+      .btn-primary:hover {
+        background-color: #3a1250;
+        border-color: #3a1250;
+      }
+
+      /* List Group */
+      .list-group-item {
+        padding: 12px 0;
+        border-left: none;
+        border-right: none;
+      }
+      .list-group-item:first-child {
+        border-top: none;
+      }
+
+      /* Form */
+      form {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+      form h3 {
+        color: var(--primary-color);
+        margin-bottom: 25px;
+      }
+      .form-control,
+      .form-select {
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid #eee;
+      }
+      .form-control:focus,
+      .form-select:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 0.25rem rgba(156, 39, 176, 0.25);
+      }
+
+      /* Image Styling */
+      .img-fluid.rounded {
+        border-radius: 15px !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Utility Classes */
+      .bg-light {
+        background-color: #f9f5fc !important;
+      }
+      .text-primary {
+        color: var(--primary-color) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Main Image Slider -->
+    <section class="slider-section">
+      <div id="facilityCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#facilityCarousel"
+            data-bs-slide-to="0"
+            class="active"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#facilityCarousel"
+            data-bs-slide-to="1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#facilityCarousel"
+            data-bs-slide-to="2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#facilityCarousel"
+            data-bs-slide-to="3"
+          ></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              src="assets/images/banner/banner1.jpg"
+              class="d-block w-100"
+              alt="Campus Overview"
+            />
+            <div class="carousel-caption">
+              <h3>Modern Campus</h3>
+              <p>
+                Our world-class facilities designed for optimal learning
+                experiences
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="https://source.unsplash.com/random/1200x550/?computer,lab"
+              class="d-block w-100"
+              alt="Computer Lab"
+            />
+            <div class="carousel-caption">
+              <h3>Advanced Computer Labs</h3>
+              <p>
+                Four state-of-the-art computer labs equipped with latest
+                technology
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="https://source.unsplash.com/random/1200x550/?hostel,room"
+              class="d-block w-100"
+              alt="Hostel Facilities"
+            />
+            <div class="carousel-caption">
+              <h3>Comfortable Hostels</h3>
+              <p>Safe and comfortable accommodation for our students</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="https://source.unsplash.com/random/1200x550/?library,study"
+              class="d-block w-100"
+              alt="Study Area"
+            />
+            <div class="carousel-caption">
+              <h3>Collaborative Spaces</h3>
+              <p>Dedicated areas for group work and individual study</p>
+            </div>
+          </div>
+        </div>
+        <!-- Enhanced Carousel Controls -->
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#facilityCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#facilityCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+    <!-- Computer Labs Section -->
+   <!-- facilities.html -->
+<section class="facility-section bg-light">
+  <div class="container">
+    <h2 class="section-title text-center">Modern Computer Labs</h2>
+    <div class="row g-4">
+      {% for facility in facilities %}
+      <div class="col-md-6 col-lg-6">
+        <div class="card facility-card">
+          <img src="{{ facility.image.url }}" class="card-img-top" alt="{{ facility.name }}" />
+          <div class="card-body">
+            <h4 class="card-title">{{ facility.title }}</h4>
+            <p class="card-text">{{ facility.description }}</p>
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">
+                <i class="bi bi-check-circle-fill text-primary me-2"></i>{{ facility.feature_1 }}
+              </li>
+              <li class="list-group-item">
+                <i class="bi bi-check-circle-fill text-primary me-2"></i>{{ facility.feature_2 }}
+              </li>
+              <li class="list-group-item">
+                <i class="bi bi-check-circle-fill text-primary me-2"></i>{{ facility.feature_3 }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+          {% comment %} <div class="col-md-6 col-lg-6">
+            <div class="card facility-card">
+              <img
+                src="https://source.unsplash.com/random/400x250/?network,server"
+                class="card-img-top"
+                alt="Networking Lab"
+              />
+              <div class="card-body">
+                <h4 class="card-title">Networking Lab</h4>
+                <p class="card-text">
+                  Designed for network administration, security, and
+                  infrastructure management training.
+                </p>
+                <ul class="list-group list-group-flush mb-3">
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                    Enterprise-grade networking equipment
+                  </li>
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                    Virtual machine environments
+                  </li>
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                    Network simulation software
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6">
+            <div class="card facility-card">
+              <img
+                src="https://source.unsplash.com/random/400x250/?data,science"
+                class="card-img-top"
+                alt="Research Computing Lab"
+              />
+              <div class="card-body">
+                <h4 class="card-title">Research Computing Lab</h4>
+                <p class="card-text">
+                  Advanced computing resources for research projects, data
+                  analysis, and computational work.
+                </p>
+                <ul class="list-group list-group-flush mb-3">
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                    High-performance computing clusters
+                  </li>
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                    Data science and AI frameworks
+                  </li>
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                    Research-focused software packages
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> {% endcomment %}
+
+    <!-- Hostel Facilities Section -->
+    <section class="facility-section">
+      <div class="container">
+        <h2 class="section-title text-center">Hostel Facilities</h2>
+        <div class="row mb-5">
+          <div class="col-md-6">
+            <img
+              src="https://source.unsplash.com/random/600x400/?hostel,room"
+              class="img-fluid rounded shadow"
+              alt="Hostel Building"
+            />
+          </div>
+          <div class="col-md-6">
+            <h3 class="mb-3" style="color: var(--primary-color)">
+              Comfortable Living
+            </h3>
+            <p class="lead">
+              Our hostel facilities provide a comfortable and secure environment
+              for students who wish to stay on campus. Each room is designed to
+              create an optimal study and living atmosphere.
+            </p>
+            <div class="row g-3 mt-4">
+              <div class="col-sm-6">
+                <div class="d-flex align-items-center p-3 bg-light rounded">
+                  <i class="bi bi-shield-check fs-2 text-primary me-3"></i>
+                  <div>
+                    <h5 class="mb-0">24/7 Security</h5>
+                    <p class="text-muted small mb-0">CCTV and guard service</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="d-flex align-items-center p-3 bg-light rounded">
+                  <i class="bi bi-wifi fs-2 text-primary me-3"></i>
+                  <div>
+                    <h5 class="mb-0">High-Speed Wi-Fi</h5>
+                    <p class="text-muted small mb-0">
+                      Fiber internet throughout
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="d-flex align-items-center p-3 bg-light rounded">
+                  <i class="bi bi-lightning-charge fs-2 text-primary me-3"></i>
+                  <div>
+                    <h5 class="mb-0">Power Backup</h5>
+                    <p class="text-muted small mb-0">
+                      Uninterrupted electricity
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="d-flex align-items-center p-3 bg-light rounded">
+                  <i class="bi bi-water fs-2 text-primary me-3"></i>
+                  <div>
+                    <h5 class="mb-0">Clean Water</h5>
+                    <p class="text-muted small mb-0">Purified drinking water</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card facility-card">
+              <img
+                src="https://source.unsplash.com/random/400x250/?dorm,room"
+                class="card-img-top"
+                alt="Hostel Room"
+              />
+              <div class="card-body">
+                <h4 class="card-title">Accommodation Options</h4>
+                <p class="card-text">
+                  We offer various room configurations to suit different
+                  preferences and budgets.
+                </p>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle text-primary me-2"></i>Single
+                    occupancy rooms
+                  </li>
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle text-primary me-2"></i>Double
+                    sharing rooms
+                  </li>
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle text-primary me-2"></i>Attached
+                    bathroom facilities
+                  </li>
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle text-primary me-2"></i>Study
+                    tables and storage
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card facility-card">
+              <img
+                src="https://source.unsplash.com/random/400x250/?cafeteria,dining"
+                class="card-img-top"
+                alt="Dining Hall"
+              />
+              <div class="card-body">
+                <h4 class="card-title">Dining & Nutrition</h4>
+                <p class="card-text">
+                  Our mess facilities provide balanced, nutritious meals
+                  throughout the day.
+                </p>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle text-primary me-2"></i>Modern
+                    dining hall
+                  </li>
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle text-primary me-2"></i>Hygienic
+                    food preparation
+                  </li>
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle text-primary me-2"></i>Multiple
+                    meal plans
+                  </li>
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle text-primary me-2"></i>Special
+                    dietary accommodations
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card facility-card">
+              <img
+                src="https://source.unsplash.com/random/400x250/?lounge,recreation"
+                class="card-img-top"
+                alt="Recreation Area"
+              />
+              <div class="card-body">
+                <h4 class="card-title">Recreation & Common Areas</h4>
+                <p class="card-text">
+                  Spaces designed for relaxation, socialization, and
+                  extracurricular activities.
+                </p>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle text-primary me-2"></i>Common
+                    rooms with TV
+                  </li>
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle text-primary me-2"></i>Indoor
+                    game facilities
+                  </li>
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle text-primary me-2"></i>Reading
+                    rooms and study lounges
+                  </li>
+                  <li class="list-group-item">
+                    <i class="bi bi-check-circle text-primary me-2"></i>Outdoor
+                    recreation areas
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="facility-section bg-light">
+      <div class="container">
+        <h2 class="section-title text-center">Visit Our Facilities</h2>
+        <div class="row justify-content-center mt-5">
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="pe-md-4">
+                  <h3 style="color: var(--primary-color)">Schedule a Tour</h3>
+                  <p class="mb-4">
+                    We welcome you to visit our campus and experience our
+                    facilities firsthand. Schedule a tour with our admissions
+                    office to learn more about what we offer.
+                  </p>
+                  <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-geo-alt fs-4 text-primary me-3"></i>
+                    <p class="mb-0">123 Education Street, Knowledge City</p>
+                  </div>
+                  <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-telephone fs-4 text-primary me-3"></i>
+                    <p class="mb-0">+1 (555) 123-4567</p>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <i class="bi bi-envelope fs-4 text-primary me-3"></i>
+                    <p class="mb-0">admissions@campusfacilities.edu</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mt-4 mt-md-0">
+                <form>
+                  <h4 class="mb-4" style="color: var(--primary-color)">
+                    Request Information
+                  </h4>
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Your Name"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      placeholder="Your Email"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <input
+                      type="tel"
+                      class="form-control"
+                      placeholder="Your Phone"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <select class="form-select">
+                      <option selected>I'm interested in...</option>
+                      <option>Computer Labs</option>
+                      <option>Hostel Facilities</option>
+                      <option>Both</option>
+                      <option>Other Facilities</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <textarea
+                      class="form-control"
+                      rows="3"
+                      placeholder="Your Message"
+                    ></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100 py-2">
+                    Submit Request
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer ==== -->
+    <footer>
+      <div class="footer-top">
+        <div class="pt-exebar">
+          <div class="container">
+            <div class="d-flex align-items-stretch">
+              <div class="pt-logo mr-auto">
+                <a href="index.html"
+                  ><img
+                    style="width: 100px"
+                    src="assets/images/Logo_sangota-removebg-preview.png"
+                    alt=""
+                /></a>
+              </div>
+              <div class="pt-social-link">
+                <ul class="list-inline m-a0">
+                  <li>
+                    <a href="#" class="btn-link"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a href="#" class="btn-link"
+                      ><i class="fa fa-twitter"></i
+                    ></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="pt-btn-join">
+                <a href="#" class="btn">Join Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 col-md-12 col-sm-12 footer-col-4">
+              <div class="widget">
+                <h5 class="footer-title">Sign Up For A Newsletter</h5>
+                <p class="text-capitalize m-b20">
+                  Weekly Breaking news analysis and cutting edge advices on job
+                  searching.
+                </p>
+                <div class="subscribe-form m-b20">
+                  <form
+                    class="subscription-form"
+                    action="http://educhamp.themetrades.com/demo/assets/script/mailchamp.php"
+                    method="post"
+                  >
+                    <div class="ajax-message"></div>
+                    <div class="input-group">
+                      <input
+                        name="email"
+                        required="required"
+                        class="form-control"
+                        placeholder="Your Email Address"
+                        type="email"
+                      />
+                      <span class="input-group-btn">
+                        <button
+                          name="submit"
+                          value="Submit"
+                          type="submit"
+                          class="btn"
+                        >
+                          <i class="fa fa-arrow-right"></i>
+                        </button>
+                      </span>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-5 col-md-7 col-sm-12">
+              <div class="row">
+                <div class="col-4 col-lg-4 col-md-4 col-sm-4">
+                  <div class="widget footer_widget">
+                    <h5 class="footer-title">Company</h5>
+                    <ul>
+                      <li><a href="index.html">Home</a></li>
+                      <li><a href="about-1.html">About</a></li>
+                      <li><a href="faq-1.html">FAQs</a></li>
+                      <li><a href="contact-1.html">Contact</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-4 col-lg-4 col-md-4 col-sm-4">
+                  <div class="widget footer_widget">
+                    <h5 class="footer-title">Get In Touch</h5>
+                    <ul>
+                      <li><a href="event.html">Event</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-4 col-lg-4 col-md-4 col-sm-4">
+                  <div class="widget footer_widget">
+                    <h5 class="footer-title">Courses</h5>
+                    <ul>
+                      <li><a href="courses.html">Courses</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-3 col-md-5 col-sm-12 footer-col-4">
+              <div class="widget widget_gallery gallery-grid-4">
+                <h5 class="footer-title">Our Gallery</h5>
+                <ul class="magnific-image">
+                  <li>
+                    <a
+                      href="assets/images/gallery/pic1.jpg"
+                      class="magnific-anchor"
+                      ><img src="assets/images/gallery/pic1.jpg" alt=""
+                    /></a>
+                  </li>
+                  <li>
+                    <a
+                      href="assets/images/gallery/pic2.jpg"
+                      class="magnific-anchor"
+                      ><img src="assets/images/gallery/pic2.jpg" alt=""
+                    /></a>
+                  </li>
+                  <li>
+                    <a
+                      href="assets/images/gallery/pic3.jpg"
+                      class="magnific-anchor"
+                      ><img src="assets/images/gallery/pic3.jpg" alt=""
+                    /></a>
+                  </li>
+                  <li>
+                    <a
+                      href="assets/images/gallery/pic4.jpg"
+                      class="magnific-anchor"
+                      ><img src="assets/images/gallery/pic4.jpg" alt=""
+                    /></a>
+                  </li>
+                  <li>
+                    <a
+                      href="assets/images/gallery/pic5.jpg"
+                      class="magnific-anchor"
+                      ><img src="assets/images/gallery/pic5.jpg" alt=""
+                    /></a>
+                  </li>
+                  <li>
+                    <a
+                      href="assets/images/gallery/pic6.jpg"
+                      class="magnific-anchor"
+                      ><img src="assets/images/gallery/pic6.jpg" alt=""
+                    /></a>
+                  </li>
+                  <li>
+                    <a
+                      href="assets/images/gallery/pic7.jpg"
+                      class="magnific-anchor"
+                      ><img src="assets/images/gallery/pic7.jpg" alt=""
+                    /></a>
+                  </li>
+                  <li>
+                    <a
+                      href="assets/images/gallery/pic8.jpg"
+                      class="magnific-anchor"
+                      ><img src="assets/images/gallery/pic8.jpg" alt=""
+                    /></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+              <a target="_blank" href="https://www.templateshub.net"
+                >Templates Hub</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer END ==== -->
+
+    <!-- External JavaScripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/vendors/bootstrap/js/popper.min.js"></script>
+    <script src="assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
+    <script src="assets/vendors/magnific-popup/magnific-popup.js"></script>
+    <script src="assets/vendors/counter/waypoints-min.js"></script>
+    <script src="assets/vendors/counter/counterup.min.js"></script>
+    <script src="assets/vendors/imagesloaded/imagesloaded.js"></script>
+    <script src="assets/vendors/masonry/masonry.js"></script>
+    <script src="assets/vendors/masonry/filter.js"></script>
+    <script src="assets/vendors/owl-carousel/owl.carousel.js"></script>
+    <script src="assets/js/functions.js"></script>
+    <script src="assets/js/contact.js"></script>
+    <script src="assets/vendors/switcher/switcher.js"></script>
+    <!-- Revolution JavaScripts Files -->
+    <script src="assets/vendors/revolution/js/jquery.themepunch.tools.min.js"></script>
+    <script src="assets/vendors/revolution/js/jquery.themepunch.revolution.min.js"></script>
+    <!-- Slider revolution 5.0 Extensions  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+    <script src="assets/vendors/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+    <script src="assets/vendors/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+    <script src="assets/vendors/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+    <script src="assets/vendors/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script src="assets/vendors/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+    <script src="assets/vendors/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script src="assets/vendors/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+    <script src="assets/vendors/revolution/js/extensions/revolution.extension.video.min.js"></script>
+    <script src="assets/vendors/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
+    />
+  </body>
+</html>

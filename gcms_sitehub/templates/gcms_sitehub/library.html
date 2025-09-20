@@ -1,0 +1,123 @@
+{% extends 'gcms_sitehub/base.html' %}
+{% load static %}
+
+{% block title %}
+Library
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+
+  <!-- Page Banner -->
+  <div class="page-banner ovbl-dark" style="background-image: url({% static 'assets/images/slider/slide1.jpg' %}); height: 80vh; background-size: cover;">
+    <div class="container">
+      <div class="page-banner-entry">
+        <h1 class="text-white mt-5">Library</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero text-white text-center position-relative" style="background-image: url('{% static 'assets/images/slider/slide2.jpg' %}'); background-size: cover; padding: 80px 0;">
+    <div class="overlay position-absolute w-100 h-100" style="background: rgba(0,0,0,0.5); top:0; left:0;"></div>
+    <div class="container position-relative">
+      <h1 class="fw-bold mb-3">Explore the World of <span style="color: #FFD700;">Books</span></h1>
+      <p class="mb-4" style="max-width: 700px; margin: auto;">Dive into a vast collection of books and resources to fuel your curiosity.</p>
+      <a href="#gallery" class="btn btn-primary px-5 py-3 rounded-pill me-3">Browse Collection</a>
+    </div>
+  </section>
+
+  <!-- Search and Filters Section -->
+  <div class="container mb-4">
+    <div class="row">
+      <!-- Search Bar -->
+      <div class="col-md-8 offset-md-2">
+        <form method="GET" action="{% url 'library_home' %}">
+          <input type="text" name="search" class="form-control" placeholder="Search for books..." value="{{ request.GET.search }}" />
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Book Gallery -->
+  <div class="content-block" id="gallery">
+    <div class="container">
+
+      <!-- Filters -->
+      <div class="feature-filters text-center mb-4">
+        <ul class="filters list-inline">
+          <li class="list-inline-item btn active" data-filter="*">All Books</li>
+          {% for cat in filters %}
+            <li class="list-inline-item btn" data-filter="{{ cat.slug }}">{{ cat.name }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Book List -->
+      <ul id="masonry" class="row list-unstyled">
+        {% for book in books %}
+        <li class="col-lg-4 col-md-6 col-sm-12 mb-4 {{ book.category|slugify }}">
+          <a href="{% url 'book_detail' book.pk %}" class="text-decoration-none">
+            <div class="card h-100 shadow-sm border-0 hover-shadow transition" style="overflow: hidden; border-radius: 12px;">
+              <div class="card-img-top bg-light" style="height: 280px; overflow: hidden;">
+                <img src="{{ book.image.url }}" class="img-fluid w-100 h-100" style="object-fit: cover;" loading="lazy" alt="{{ book.title }}">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-primary">{{ book.title }}</h5>
+                <p class="card-text"><i class="fa fa-user me-1"></i> {{ book.author }}</p>
+                <p class="card-text"><i class="fa fa-book me-1"></i> {{ book.publisher }}</p>
+                <p class="text-muted small">{{ book.description|truncatewords:20 }}</p>
+                <div class="mt-2">
+                  {% if book.published_year %}
+                    <span class="badge bg-secondary">{{ book.published_year }}</span>
+                  {% endif %}
+                  {% if book.edition %}
+                    <span class="badge bg-info text-dark">{{ book.edition }}</span>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </a>
+        </li>
+        {% empty %}
+          <p class="text-center">No books available.</p>
+        {% endfor %}
+      </ul>
+
+      <!-- Pagination -->
+      <div class="pagination-container text-center">
+        {% if books.has_previous %}
+          <a href="?page=1" class="btn btn-outline-primary">First</a>
+          <a href="?page={{ books.previous_page_number }}" class="btn btn-outline-primary">Previous</a>
+        {% endif %}
+        <span>Page {{ books.number }} of {{ books.paginator.num_pages }}</span>
+        {% if books.has_next %}
+          <a href="?page={{ books.next_page_number }}" class="btn btn-outline-primary">Next</a>
+          <a href="?page={{ books.paginator.num_pages }}" class="btn btn-outline-primary">Last</a>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- jQuery Filter -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(function () {
+    $('.filters .btn').on('click', function () {
+      var filter = $(this).data('filter');
+      $('.filters .btn').removeClass('active');
+      $(this).addClass('active');
+
+      if (filter === '*') {
+        $('#masonry li').show();
+      } else {
+        $('#masonry li').hide();
+        $('#masonry li.' + filter).show();
+      }
+    });
+  });
+</script>
+
+{% endblock %}

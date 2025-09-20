@@ -1,0 +1,73 @@
+{% extends 'gcms_sitehub/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-content bg-white">
+    <!-- Inner Page Banner -->
+    <div class="page-banner ovbl-dark" style="background-image: url({% static 'assets/images/slider/slide1.jpg' %}); height: 80vh;">
+        <div class="container">
+            <div class="page-banner-entry">
+                <h1 class="text-white" style="margin-top: 52px">Latest News</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-row">
+        <div class="container">
+            <ul class="list-inline">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li>News</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- News Grid -->
+    <div class="section-area section-sp2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 heading-bx left">
+                    <h2 class="title-head">GCMS <span>Latest News</span></h2>
+                    <p>Stay updated with the latest happenings at Government College of Management Science, Sangota</p>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for item in news %}
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="recent-news d-flex flex-column shadow-sm rounded" style="height: 100%; background: #fff;">
+                        <!-- Image -->
+                        <div class="action-box">
+                            <img src="{{ item.image.url }}" alt="{{ item.title }}" class="w-100" style="height: 180px; object-fit: cover;">
+                        </div>
+
+                        <!-- Info -->
+                        <div class="info-bx d-flex flex-column flex-grow-1 p-3">
+                            <ul class="media-post list-inline mb-2 small text-muted">
+                                <li class="list-inline-item"><i class="fa fa-calendar"></i> {{ item.date|date:"M d, Y" }}</li>
+                                <li class="list-inline-item"><i class="fa fa-user"></i> {{ item.author }}</li>
+                            </ul>
+
+                            <h6 class="post-title mb-2">
+                                <a href="{% url 'news_detail' item.slug %}" class="text-dark">{{ item.title|truncatewords:12 }}</a>
+                            </h6>
+
+                            <p class="flex-grow-1 small text-muted">{{ item.description|truncatewords:22 }}</p>
+
+                            <div class="post-extra d-flex justify-content-between align-items-center mt-2">
+                                <a href="{% url 'news_detail' item.slug %}" class="btn-link">READ MORE</a>
+                                <span class="comments-bx small"><i class="fa fa-comments-o"></i> 0 Comments</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-center text-muted py-4 col-12">
+                    <p>No news articles available at the moment.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
